@@ -792,11 +792,18 @@ function _runServer(argv) {
 
   console.log(chalk`Starting IdP server on port {cyan ${app.get('host')}:${app.get('port')}}...\n`);
 
-  httpServer.listen(app.get('port'), app.get('host'), function() {
+  // httpServer.listen(app.get('port'), app.get('host'), function() {
+    // const scheme          = argv.https ? 'https' : 'http',
+    //       {address, port} = httpServer.address(),
+    //       hostname        = WILDCARD_ADDRESSES.includes(address) ? os.hostname() : 'localhost',
+    //       baseUrl         = `${scheme}://${hostname}:${port}`;
+
+  httpServer.listen(process.env.PORT, function() {
     const scheme          = argv.https ? 'https' : 'http',
-          {address, port} = httpServer.address(),
-          hostname        = WILDCARD_ADDRESSES.includes(address) ? os.hostname() : 'localhost',
-          baseUrl         = `${scheme}://${hostname}:${port}`;
+      // {address, port}     = httpServer.address(),
+      // hostname            = WILDCARD_ADDRESSES.includes(address) ? os.hostname() : 'localhost',
+      // baseUrl             = `${scheme}://${hostname}:${port}`;
+      baseUrl                = 'http://okta-saml-idp.herokuapp.com'
 
     console.log(dedent(chalk`
       IdP Metadata URL:
