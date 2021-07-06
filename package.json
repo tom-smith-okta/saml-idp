@@ -19,7 +19,7 @@
   },
   "main": "./app.js",
   "scripts": {
-    "start": "node app.js --acsUrl https://tomco.okta.com/sso/saml2/0oaj070bkoqpd1vLi1t7 --audience https://www.okta.com/saml2/service-provider/spdeicxkjreukbaekptg"
+    "start": "node app.js"
   },
   "bin": "./bin/run.js",
   "engines": {
