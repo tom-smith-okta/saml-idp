@@ -19,7 +19,7 @@
   },
   "main": "./app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js --acsUrl http://acme.okta.com/auth/saml20/exampleidp --audience https://www.okta.com/saml2/service-provider/spf5aFRRXFGIMAYXQPNV"
   },
   "bin": "./bin/run.js",
   "engines": {
