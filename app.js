@@ -58,6 +58,19 @@ const KEY_CERT_HELP_TEXT = dedent(chalk`
     -out idp-public-cert.pem -days 7300}`
 );
 
+///////////////////////////////////////////
+
+if ("private_key" in process.env) {
+  try {
+    const data = fs.writeFileSync('./idp-private-key.pem', process.env.private_key)
+    //file written successfully
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+///////////////////////////////////////////
+
 function matchesCertType(value, type) {
   return CRYPT_TYPES[type] && CRYPT_TYPES[type].test(value);
 }
@@ -197,7 +210,7 @@ function processArgs(args, options) {
       key: {
         description: 'IdP Signature PrivateKey Certificate',
         required: true,
-        default: process.env.private_key,
+        default: './idp-private-cert.pem',
         coerce: makeCertFileCoercer('RSA private key', 'IdP Signature PrivateKey Certificate', KEY_CERT_HELP_TEXT)
       },
       issuer: {
