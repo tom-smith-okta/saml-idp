@@ -209,7 +209,8 @@ function processArgs(args, options) {
       acsUrl: {
         description: 'SP Assertion Consumer URL',
         required: true,
-        alias: 'acs'
+        alias: 'acs',
+        default: process.env.acsUrl
       },
       sloUrl: {
         description: 'SP Single Logout URL',
@@ -219,7 +220,8 @@ function processArgs(args, options) {
       audience: {
         description: 'SP Audience URI',
         required: true,
-        alias: 'aud'
+        alias: 'aud',
+        default: process.env.audience
       },
       serviceProviderId: {
         description: 'SP Issuer/Entity URI',
@@ -402,9 +404,9 @@ function _runServer(argv) {
     cert:                   argv.cert,
     key:                    argv.key,
     audience:               argv.audience,
-    recipient:              argv.acsUrl,
-    destination:            argv.acsUrl,
-    acsUrl:                 argv.acsUrl,
+    recipient:              process.env.acsUrl,
+    destination:            process.env.acsUrl,
+    acsUrl:                 process.env.acsUrl,
     sloUrl:                 argv.sloUrl,
     RelayState:             argv.relayState,
     allowRequestAcsUrl:     !argv.disableRequestAcsUrl,
