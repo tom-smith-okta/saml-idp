@@ -210,7 +210,7 @@ function processArgs(args, options) {
       key: {
         description: 'IdP Signature PrivateKey Certificate',
         required: true,
-        default: './idp-private-cert.pem',
+        default: './idp-private-key.pem',
         coerce: makeCertFileCoercer('RSA private key', 'IdP Signature PrivateKey Certificate', KEY_CERT_HELP_TEXT)
       },
       issuer: {
