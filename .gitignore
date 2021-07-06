@@ -1,3 +1,6 @@
+## tom-smith-okta ##
+idp-private-key.pem
+
 ### macOS ###
 *.DS_Store
 .AppleDouble
