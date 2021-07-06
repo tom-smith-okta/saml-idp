@@ -179,13 +179,14 @@ function processArgs(args, options) {
       host: {
         description: 'IdP Web Server Listener Host',
         required: false,
-        default: 'localhost'
+//        default: 'localhost'
+        default: process.env.HOST
       },
       port: {
         description: 'IdP Web Server Listener Port',
         required: true,
         alias: 'p',
-        default: process.env.PORT
+        default: ''
       },
       cert: {
         description: 'IdP Signature PublicKey Certificate',
