@@ -482,8 +482,22 @@ function _runServer(argv) {
                               let buff = new Buffer(data);
                               let base64data = buff.toString('base64');
 
-                              axios.post('https://webhook.site/d4060c55-7e72-49e1-9f27-20934bd88d41', {
-                                saml: base64data
+                              // axios.post('https://webhook.site/d4060c55-7e72-49e1-9f27-20934bd88d41', {
+                              //   saml: base64data
+                              // })
+                              // .then(function (response) {
+                              //   console.log(response);
+                              // })
+                              // .catch(function (error) {
+                              //   console.log(error);
+                              // });
+
+                              axios.post('https://tomco.okta.com/oauth2/ausj09s9elt00otWB1t7/v1/token', {
+                                assertion: base64data,
+                                client_id: process.env.client_id,
+                                client_secret: process.env.client_secret,
+                                grant_type: 'urn:ietf:params:oauth:grant-type:saml2-bearer',
+                                scope: 'openid offline_access'
                               })
                               .then(function (response) {
                                 console.log(response);
@@ -492,25 +506,25 @@ function _runServer(argv) {
                                 console.log(error);
                               });
 
-                              axios({
-                                url: 'https://tomco.okta.com/oauth2/ausj09s9elt00otWB1t7/v1/token',
-                                method: 'post',
-                                params: {
-                                  grant_type: 'urn:ietf:params:oauth:grant-type:saml2-bearer',
-                                  scope: 'openid offline_access',
-                                  assertion: base64data,
-                                  auth: {
-                                    username: process.env.client_id,
-                                    password: process.env.client_secret
-                                  }
-                                }
-                              })
-                              .then(function (response) {
-                                console.log(response);
-                              })
-                              .catch(function (error) {
-                                console.log(error);
-                              });
+                              // axios({
+                              //   url: 'https://tomco.okta.com/oauth2/ausj09s9elt00otWB1t7/v1/token',
+                              //   method: 'post',
+                              //   params: {
+                              //     grant_type: 'urn:ietf:params:oauth:grant-type:saml2-bearer',
+                              //     scope: 'openid offline_access',
+                              //     assertion: base64data,
+                              //     auth: {
+                              //       username: process.env.client_id,
+                              //       password: process.env.client_secret
+                              //     }
+                              //   }
+                              // })
+                              // .then(function (response) {
+                              //   console.log(response);
+                              // })
+                              // .catch(function (error) {
+                              //   console.log(error);
+                              // });
 
                               res.render('samlresponse', {
                                 AcsUrl: opts.postUrl,
