@@ -481,25 +481,25 @@ function _runServer(argv) {
 
                               // POST to webhook.site using body data
                               // works
-                              axios({
-                                url: 'https://webhook.site/d4060c55-7e72-49e1-9f27-20934bd88d41',
-                                method: 'post',
-                                data: {
-                                  grant_type: 'urn:ietf:params:oauth:grant-type:saml2-bearer',
-                                  scope: 'openid offline_access',
-                                  assertion: response.toString('base64'),
-                                  auth: {
-                                    username: process.env.client_id,
-                                    password: process.env.client_secret
-                                  }
-                                }
-                              })
-                              .then(function (response) {
-                                console.log(response);
-                              })
-                              .catch(function (error) {
-                                console.log(error);
-                              });
+                              // axios({
+                              //   url: 'https://webhook.site/d4060c55-7e72-49e1-9f27-20934bd88d41',
+                              //   method: 'post',
+                              //   data: {
+                              //     grant_type: 'urn:ietf:params:oauth:grant-type:saml2-bearer',
+                              //     scope: 'openid offline_access',
+                              //     assertion: response.toString('base64'),
+                              //     auth: {
+                              //       username: process.env.client_id,
+                              //       password: process.env.client_secret
+                              //     }
+                              //   }
+                              // })
+                              // .then(function (response) {
+                              //   console.log(response);
+                              // })
+                              // .catch(function (error) {
+                              //   console.log(error);
+                              // });
 
                               // axios.post('https://tomco.okta.com/oauth2/ausj09s9elt00otWB1t7/v1/token', {
                               //   assertion: base64data,
@@ -577,6 +577,7 @@ function _runServer(argv) {
                               
                               axios(config)
                               .then(function (response) {
+                                console.log("this is the response from Okta")
                                 console.log(JSON.stringify(response.data));
                               })
                               .catch(function (error) {
