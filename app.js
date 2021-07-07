@@ -486,7 +486,7 @@ function _runServer(argv) {
                                 data: {
                                   grant_type: 'urn:ietf:params:oauth:grant-type:saml2-bearer',
                                   scope: 'openid offline_access',
-                                  assertion: base64data,
+                                  assertion: response.toString('base64'),
                                   auth: {
                                     username: process.env.client_id,
                                     password: process.env.client_secret
