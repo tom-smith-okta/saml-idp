@@ -4,10 +4,10 @@
  */
 
 
- const xml_parser = require('fast-xml-parser');
- const P = require("fast-xml-parser").j2xParser;
+//  const xml_parser = require('fast-xml-parser');
+//  const P = require("fast-xml-parser").j2xParser;
 
- var he = require('he');
+//  var he = require('he');
 
 const axios               = require('axios').default,
       qs                  = require('qs'),
@@ -485,16 +485,16 @@ function _runServer(argv) {
 
                               console.log(prettyPrintXml(response.toString(), 4));
 
-                              var jsonObj = xml_parser.parse(response.toString());
+                              // var jsonObj = xml_parser.parse(response.toString());
 
-                              console.log("json object: ")
-                              console.log(jsonObj)
+                              // console.log("json object: ")
+                              // console.log(jsonObj)
 
-                              var p = new P();
+                              // var p = new P();
 
-                              const x = p.parse(jsonObj['samlp:Response']['saml:Assertion'])
+                              // const x = p.parse(jsonObj['samlp:Response']['saml:Assertion'])
 
-                              console.log(prettyPrintXml(x, 4));
+                              // console.log(prettyPrintXml(x, 4));
 
 
 
