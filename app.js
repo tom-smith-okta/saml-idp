@@ -4,7 +4,7 @@
  */
 
 
- var parser = require('fast-xml-parser');
+ const xml_parser = require('fast-xml-parser');
  const P = require("fast-xml-parser").j2xParser;
 
  var he = require('he');
@@ -485,7 +485,7 @@ function _runServer(argv) {
 
                               console.log(prettyPrintXml(response.toString(), 4));
 
-                              var jsonObj = parser.parse(response.toString());
+                              var jsonObj = xml_parser.parse(response.toString());
 
                               console.log("json object: ")
                               console.log(jsonObj)
