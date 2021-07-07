@@ -4,6 +4,7 @@
  */
 
 const axios               = require('axios').default,
+      qs                  = require('qs'),
       chalk               = require('chalk'),
       express             = require('express'),
       os                  = require('os'),
