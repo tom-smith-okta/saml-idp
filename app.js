@@ -485,10 +485,10 @@ function _runServer(argv) {
 
                               console.log(prettyPrintXml(response.toString(), 4));
 
-                              // var jsonObj = xml_parser.parse(response.toString());
+                              const jsonObj = xml_parser.parse(response.toString());
 
-                              // console.log("json object: ")
-                              // console.log(jsonObj)
+                              console.log("json object: ")
+                              console.log(jsonObj)
 
                               // var p = new P();
 
