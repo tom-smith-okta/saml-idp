@@ -579,19 +579,19 @@ function _runServer(argv) {
                               .then(function (response) {
                                 console.log("this is the response from Okta")
                                 console.log(JSON.stringify(response.data));
-                                res.send("let's hope there's an access token in the server-side console")
+                                // res.send("let's hope there's an access token in the server-side console")
 
                               })
                               .catch(function (error) {
                                 console.log(error);
-                                res.send("error")
+                                // res.send("error")
                               });
                               
-                              // res.render('samlresponse', {
-                              //   AcsUrl: opts.postUrl,
-                              //   SAMLResponse: response.toString('base64'),
-                              //   RelayState: opts.RelayState
-                              // });
+                              res.render('samlresponse', {
+                                AcsUrl: opts.postUrl,
+                                SAMLResponse: response.toString('base64'),
+                                RelayState: opts.RelayState
+                              });
                             }
   }
 
