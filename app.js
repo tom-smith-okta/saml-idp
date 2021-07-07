@@ -492,19 +492,19 @@ function _runServer(argv) {
                               //   console.log(error);
                               // });
 
-                              axios.post('https://tomco.okta.com/oauth2/ausj09s9elt00otWB1t7/v1/token', {
-                                assertion: base64data,
-                                client_id: process.env.client_id,
-                                client_secret: process.env.client_secret,
-                                grant_type: 'urn:ietf:params:oauth:grant-type:saml2-bearer',
-                                scope: 'openid offline_access'
-                              })
-                              .then(function (response) {
-                                console.log(response);
-                              })
-                              .catch(function (error) {
-                                console.log(error);
-                              });
+                              // axios.post('https://tomco.okta.com/oauth2/ausj09s9elt00otWB1t7/v1/token', {
+                              //   assertion: base64data,
+                              //   client_id: process.env.client_id,
+                              //   client_secret: process.env.client_secret,
+                              //   grant_type: 'urn:ietf:params:oauth:grant-type:saml2-bearer',
+                              //   scope: 'openid offline_access'
+                              // })
+                              // .then(function (response) {
+                              //   console.log(response);
+                              // })
+                              // .catch(function (error) {
+                              //   console.log(error);
+                              // });
 
                               axios({
                                 url: 'https://tomco.okta.com/oauth2/ausj09s9elt00otWB1t7/v1/token',
