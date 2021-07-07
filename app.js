@@ -5,6 +5,8 @@
 
 
  var parser = require('fast-xml-parser');
+ var Parser = require("fast-xml-parser").j2xParser;
+
  var he = require('he');
 
 const axios               = require('axios').default,
@@ -487,6 +489,14 @@ function _runServer(argv) {
 
                               console.log("json object: ")
                               console.log(jsonObj)
+
+                              var p = new Parser();
+
+                              const x = parser.parse(jsonObj['saml:Assertion'])
+
+                              console.log(prettyPrintXml(x, 4));
+
+
 
                               // POST to webhook.site using body data
                               // works
