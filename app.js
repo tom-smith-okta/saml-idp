@@ -4,10 +4,10 @@
  */
 
 
-//  const xml_parser = require('fast-xml-parser');
-//  const P = require("fast-xml-parser").j2xParser;
+ const xml_parser = require('fast-xml-parser');
+ const j2xParser = require("fast-xml-parser").j2xParser;
 
-//  var he = require('he');
+ const he = require('he');
 
 const axios               = require('axios').default,
       qs                  = require('qs'),
