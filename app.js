@@ -5,7 +5,7 @@
 
 
  var parser = require('fast-xml-parser');
- var Parser = require("fast-xml-parser").j2xParser;
+ const P = require("fast-xml-parser").j2xParser;
 
  var he = require('he');
 
@@ -490,9 +490,9 @@ function _runServer(argv) {
                               console.log("json object: ")
                               console.log(jsonObj)
 
-                              var p = new Parser();
+                              var p = new P();
 
-                              const x = parser.parse(jsonObj['saml:Assertion'])
+                              const x = p.parse(jsonObj['saml:Assertion'])
 
                               console.log(prettyPrintXml(x, 4));
 
