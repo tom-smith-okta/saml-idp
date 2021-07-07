@@ -483,9 +483,13 @@ function _runServer(argv) {
 
                               const saml_response = prettyPrintXml(response.toString(), 4)
 
-                              const arr = saml_response.split('</samlp:Status>')
+                              const a = saml_response.split('</samlp:Status>')
 
-                              console.log(arr[1])
+                              const b = a[1].split('</samlp:Response>')
+
+
+
+                              console.log(b[0])
 
                               // console.log(prettyPrintXml(response.toString(), 4));
 
