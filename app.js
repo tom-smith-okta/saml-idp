@@ -492,7 +492,7 @@ function _runServer(argv) {
 
                               var p = new P();
 
-                              const x = p.parse(jsonObj['saml:Assertion'])
+                              const x = p.parse(jsonObj['samlp:Response']['saml:Assertion'])
 
                               console.log(prettyPrintXml(x, 4));
 
