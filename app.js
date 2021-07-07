@@ -497,6 +497,15 @@ function _runServer(argv) {
                               console.log("assertion object: ")
 
                               console.log(jsonObj['samlp:Response']['saml:Assertion'])
+
+                              const jx = new j2xParser()
+
+                              const xml_assertion = jx.parse(jx)
+
+                              console.log("the assertion in xml is: ")
+                              console.log(prettyPrintXml(xml_assertion, 4));
+
+
                             
                               // var p = new P();
 
