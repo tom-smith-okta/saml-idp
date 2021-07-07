@@ -481,7 +481,9 @@ function _runServer(argv) {
                                   {bold SAMLResponse} =>`
                               ));
 
-                              const saml_response = prettyPrintXml(response.toString(), 4)
+                              // const saml_response = prettyPrintXml(response.toString(), 4)
+                              
+                              const saml_response = response.toString()
 
                               const a = saml_response.split('</samlp:Status>')
 
