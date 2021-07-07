@@ -3,6 +3,10 @@
  * Module dependencies.
  */
 
+
+ var parser = require('fast-xml-parser');
+ var he = require('he');
+
 const axios               = require('axios').default,
       qs                  = require('qs'),
       chalk               = require('chalk'),
@@ -478,6 +482,11 @@ function _runServer(argv) {
                               // const saml_response = prettyPrintXml(response.toString(), 4)
 
                               console.log(prettyPrintXml(response.toString(), 4));
+
+                              var jsonObj = parser.parse(response.toString());
+
+                              console.log("json object: ")
+                              console.log(jsonObj)
 
                               // POST to webhook.site using body data
                               // works
