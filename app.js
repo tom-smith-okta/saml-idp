@@ -506,25 +506,25 @@ function _runServer(argv) {
                                 console.log(error);
                               });
 
-                              // axios({
-                              //   url: 'https://tomco.okta.com/oauth2/ausj09s9elt00otWB1t7/v1/token',
-                              //   method: 'post',
-                              //   params: {
-                              //     grant_type: 'urn:ietf:params:oauth:grant-type:saml2-bearer',
-                              //     scope: 'openid offline_access',
-                              //     assertion: base64data,
-                              //     auth: {
-                              //       username: process.env.client_id,
-                              //       password: process.env.client_secret
-                              //     }
-                              //   }
-                              // })
-                              // .then(function (response) {
-                              //   console.log(response);
-                              // })
-                              // .catch(function (error) {
-                              //   console.log(error);
-                              // });
+                              axios({
+                                url: 'https://tomco.okta.com/oauth2/ausj09s9elt00otWB1t7/v1/token',
+                                method: 'post',
+                                params: {
+                                  grant_type: 'urn:ietf:params:oauth:grant-type:saml2-bearer',
+                                  scope: 'openid offline_access',
+                                  assertion: base64data,
+                                  auth: {
+                                    username: process.env.client_id,
+                                    password: process.env.client_secret
+                                  }
+                                }
+                              })
+                              .then(function (response) {
+                                console.log(response);
+                              })
+                              .catch(function (error) {
+                                console.log(error);
+                              });
 
                               res.render('samlresponse', {
                                 AcsUrl: opts.postUrl,
