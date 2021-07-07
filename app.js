@@ -494,6 +494,10 @@ function _runServer(argv) {
 
                               console.log(jsonObj['samlp:Response'])
 
+                              console.log("assertion object: ")
+
+                              console.log(jsonObj['samlp:Response']['saml:Assertion'])
+                            
                               // var p = new P();
 
                               // const x = p.parse(jsonObj['samlp:Response']['saml:Assertion'])
