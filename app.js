@@ -481,29 +481,33 @@ function _runServer(argv) {
                                   {bold SAMLResponse} =>`
                               ));
 
-                              // const saml_response = prettyPrintXml(response.toString(), 4)
+                              const saml_response = prettyPrintXml(response.toString(), 4)
 
-                              console.log(prettyPrintXml(response.toString(), 4));
+                              const arr = saml_response.split('</samlp:Status>')
 
-                              const jsonObj = xml_parser.parse(response.toString());
+                              console.log(arr[1])
 
-                              console.log("json object: ")
-                              console.log(jsonObj)
+                              // console.log(prettyPrintXml(response.toString(), 4));
 
-                              console.log("response object: ")
+                              // const jsonObj = xml_parser.parse(response.toString());
 
-                              console.log(jsonObj['samlp:Response'])
+                              // console.log("json object: ")
+                              // console.log(jsonObj)
 
-                              console.log("assertion object: ")
+                              // console.log("response object: ")
 
-                              console.log(jsonObj['samlp:Response']['saml:Assertion'])
+                              // console.log(jsonObj['samlp:Response'])
 
-                              const jx = new j2xParser()
+                              // console.log("assertion object: ")
 
-                              const xml_assertion = jx.parse(jx)
+                              // console.log(jsonObj['samlp:Response']['saml:Assertion'])
 
-                              console.log("the assertion in xml is: ")
-                              console.log(prettyPrintXml(xml_assertion, 4));
+                              // const jx = new j2xParser()
+
+                              // const xml_assertion = jx.parse(jx)
+
+                              // console.log("the assertion in xml is: ")
+                              // console.log(prettyPrintXml(xml_assertion, 4));
 
 
                             
