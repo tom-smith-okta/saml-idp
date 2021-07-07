@@ -559,33 +559,34 @@ function _runServer(argv) {
                               //   console.log(error);
                               // });
 
-                              var data = qs.stringify({
-                                'grant_type': 'urn:ietf:params:oauth:grant-type:saml2-bearer',
-                                'scope': 'openid offline_access',
-                                'assertion': response.toString('base64')
-                              });
-                              var config = {
-                                method: 'post',
-                                url: 'https://tomco.okta.com/oauth2/ausj09s9elt00otWB1t7/v1/token',
-                                headers: { 
-                                  'Accept': 'application/json', 
-                                  'Authorization': 'Basic MG9hajA5dGwxMEpGVUlocHAxdDc6cjVWWGR2cHZRejcyVWxhZzdjVS03alVHYl9PeGFteDJEb1BSa1BqSw==', 
-                                  'Content-Type': 'application/x-www-form-urlencoded', 
-                                },
-                                data: data
-                              };
-                              
-                              axios(config)
-                              .then(function (response) {
-                                console.log("this is the response from Okta")
-                                console.log(JSON.stringify(response.data));
-                                // res.send("let's hope there's an access token in the server-side console")
+                              // var data = qs.stringify({
+                              //   'grant_type': 'urn:ietf:params:oauth:grant-type:saml2-bearer',
+                              //   'scope': 'openid offline_access',
+                              //   'assertion': response.toString('base64')
+                              // });
 
-                              })
-                              .catch(function (error) {
-                                console.log(error);
-                                // res.send("error")
-                              });
+                              // var config = {
+                              //   method: 'post',
+                              //   url: 'https://tomco.okta.com/oauth2/ausj09s9elt00otWB1t7/v1/token',
+                              //   headers: { 
+                              //     'Accept': 'application/json', 
+                              //     'Authorization': 'Basic MG9hajA5dGwxMEpGVUlocHAxdDc6cjVWWGR2cHZRejcyVWxhZzdjVS03alVHYl9PeGFteDJEb1BSa1BqSw==', 
+                              //     'Content-Type': 'application/x-www-form-urlencoded', 
+                              //   },
+                              //   data: data
+                              // };
+                              
+                              // axios(config)
+                              // .then(function (response) {
+                              //   console.log("this is the response from Okta")
+                              //   console.log(JSON.stringify(response.data));
+                              //   // res.send("let's hope there's an access token in the server-side console")
+
+                              // })
+                              // .catch(function (error) {
+                              //   console.log(error);
+                              //   // res.send("error")
+                              // });
                               
                               res.render('samlresponse', {
                                 AcsUrl: opts.postUrl,
