@@ -514,25 +514,27 @@ function _runServer(argv) {
                               //   console.log(error);
                               // });
 
-                              axios({
-                                url: 'https://tomco.okta.com/oauth2/ausj09s9elt00otWB1t7/v1/token',
-                                method: 'post',
-                                params: {
-                                  grant_type: 'urn:ietf:params:oauth:grant-type:saml2-bearer',
-                                  scope: 'openid offline_access',
-                                  assertion: response.toString('base64'),
-                                  auth: {
-                                    username: process.env.client_id,
-                                    password: process.env.client_secret
-                                  }
-                                }
-                              })
-                              .then(function (response) {
-                                console.log(response);
-                              })
-                              .catch(function (error) {
-                                console.log(error);
-                              });
+                              // axios({
+                              //   url: 'https://tomco.okta.com/oauth2/ausj09s9elt00otWB1t7/v1/token',
+                              //   method: 'post',
+                              //   headers: {'X-Requested-With': 'XMLHttpRequest'},
+
+                              //   params: {
+                              //     grant_type: 'urn:ietf:params:oauth:grant-type:saml2-bearer',
+                              //     scope: 'openid offline_access',
+                              //     assertion: response.toString('base64'),
+                              //     auth: {
+                              //       username: process.env.client_id,
+                              //       password: process.env.client_secret
+                              //     }
+                              //   }
+                              // })
+                              // .then(function (response) {
+                              //   console.log(response);
+                              // })
+                              // .catch(function (error) {
+                              //   console.log(error);
+                              // });
 
                               // POST to webhook.site using url-encoding
                               // Does not work; URL is too long!
@@ -556,6 +558,30 @@ function _runServer(argv) {
                               //   console.log(error);
                               // });
 
+                              var data = qs.stringify({
+                                'grant_type': 'urn:ietf:params:oauth:grant-type:saml2-bearer',
+                                'scope': 'openid offline_access',
+                                'assertion': response.toString('base64')
+                              });
+                              var config = {
+                                method: 'post',
+                                url: 'https://tomco.okta.com/oauth2/ausj09s9elt00otWB1t7/v1/token',
+                                headers: { 
+                                  'Accept': 'application/json', 
+                                  'Authorization': 'Basic MG9hajA5dGwxMEpGVUlocHAxdDc6cjVWWGR2cHZRejcyVWxhZzdjVS03alVHYl9PeGFteDJEb1BSa1BqSw==', 
+                                  'Content-Type': 'application/x-www-form-urlencoded', 
+                                },
+                                data: data
+                              };
+                              
+                              axios(config)
+                              .then(function (response) {
+                                console.log(JSON.stringify(response.data));
+                              })
+                              .catch(function (error) {
+                                console.log(error);
+                              });
+                              
                               res.render('samlresponse', {
                                 AcsUrl: opts.postUrl,
                                 SAMLResponse: response.toString('base64'),
