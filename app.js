@@ -499,9 +499,7 @@ function _runServer(argv) {
                                 url: process.env.issuer + '/v1/token',
                                 headers: { 
                                   'Accept': 'application/json',
-                                  'Authorization': 'Basic ' + Buffer.from(authz_string).toString('base64'), 
-
-                                  // 'Authorization': 'Basic MG9hajA5dGwxMEpGVUlocHAxdDc6cjVWWGR2cHZRejcyVWxhZzdjVS03alVHYl9PeGFteDJEb1BSa1BqSw==', 
+                                  'Authorization': 'Basic ' + Buffer.from(authz_string).toString('base64'),
                                   'Content-Type': 'application/x-www-form-urlencoded', 
                                 },
                                 data: data
@@ -511,12 +509,9 @@ function _runServer(argv) {
                               .then(function (response) {
                                 console.log("this is the response from Okta")
                                 console.log(JSON.stringify(response.data));
-                                // res.send("let's hope there's an access token in the server-side console")
-
                               })
                               .catch(function (error) {
                                 console.log(error);
-                                // res.send("error")
                               });
                               
                               res.render('samlresponse', {
@@ -851,18 +846,12 @@ function _runServer(argv) {
 
   console.log(chalk`Starting IdP server on port {cyan ${app.get('host')}:${app.get('port')}}...\n`);
 
-  // httpServer.listen(app.get('port'), app.get('host'), function() {
-    // const scheme          = argv.https ? 'https' : 'http',
-    //       {address, port} = httpServer.address(),
-    //       hostname        = WILDCARD_ADDRESSES.includes(address) ? os.hostname() : 'localhost',
-    //       baseUrl         = `${scheme}://${hostname}:${port}`;
-
   httpServer.listen(process.env.PORT, function() {
     const scheme          = argv.https ? 'https' : 'http',
       // {address, port}     = httpServer.address(),
       // hostname            = WILDCARD_ADDRESSES.includes(address) ? os.hostname() : 'localhost',
       // baseUrl             = `${scheme}://${hostname}:${port}`;
-      baseUrl                = 'http://okta-saml-idp.herokuapp.com'
+      baseUrl                = process.env.baseUrl
 
     console.log(dedent(chalk`
       IdP Metadata URL:
