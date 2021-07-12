@@ -553,7 +553,10 @@ function _runServer(argv) {
         return req.path.startsWith('/bower_components') || req.path.startsWith('/css')
       }
   }));
-  app.use(bodyParser.urlencoded({extended: true}));
+  // app.use(bodyParser.urlencoded({extended: true}));
+
+  app.use(express.json()); //Used to parse JSON bodies
+
   app.use(express.static(path.join(__dirname, 'public')));
   app.use(session({
     secret: 'The universe works on a math equation that never even ever really ends in the end',
