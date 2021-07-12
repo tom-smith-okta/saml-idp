@@ -3,17 +3,10 @@
  * Module dependencies.
  */
 
-// const ;
-// const xml_parser = require('fast-xml-parser');
-// const j2xParser = require("fast-xml-parser").j2xParser;
-
 const axios               = require('axios').default,
-      he                  = require('he'),
       qs                  = require('qs'),
       chalk               = require('chalk'),
       express             = require('express'),
-      xml_parser          = require('fast-xml-parser'),
-      j2xParser = require("fast-xml-parser").j2xParser;
       os                  = require('os'),
       fs                  = require('fs'),
       http                = require('http'),
@@ -489,139 +482,26 @@ function _runServer(argv) {
                               const b = a[1].split('</samlp:Response>')
                               const saml_assertion = b[0]
 
-                              // const buff = new Buffer(saml_assertion);
-
                               const buff = Buffer.from(saml_assertion, 'utf8');
 
                               const base64data = buff.toString('base64');
 
-
-                              console.log(b[0])
-
-                              // console.log(prettyPrintXml(response.toString(), 4));
-
-                              // const jsonObj = xml_parser.parse(response.toString());
-
-                              // console.log("json object: ")
-                              // console.log(jsonObj)
-
-                              // console.log("response object: ")
-
-                              // console.log(jsonObj['samlp:Response'])
-
-                              // console.log("assertion object: ")
-
-                              // console.log(jsonObj['samlp:Response']['saml:Assertion'])
-
-                              // const jx = new j2xParser()
-
-                              // const xml_assertion = jx.parse(jx)
-
-                              // console.log("the assertion in xml is: ")
-                              // console.log(prettyPrintXml(xml_assertion, 4));
-
-
-                            
-                              // var p = new P();
-
-                              // const x = p.parse(jsonObj['samlp:Response']['saml:Assertion'])
-
-                              // console.log(prettyPrintXml(x, 4));
-
-
-
-                              // POST to webhook.site using body data
-                              // works
-                              // axios({
-                              //   url: 'https://webhook.site/d4060c55-7e72-49e1-9f27-20934bd88d41',
-                              //   method: 'post',
-                              //   data: {
-                              //     grant_type: 'urn:ietf:params:oauth:grant-type:saml2-bearer',
-                              //     scope: 'openid offline_access',
-                              //     assertion: response.toString('base64'),
-                              //     auth: {
-                              //       username: process.env.client_id,
-                              //       password: process.env.client_secret
-                              //     }
-                              //   }
-                              // })
-                              // .then(function (response) {
-                              //   console.log(response);
-                              // })
-                              // .catch(function (error) {
-                              //   console.log(error);
-                              // });
-
-                              // axios.post('https://tomco.okta.com/oauth2/ausj09s9elt00otWB1t7/v1/token', {
-                              //   assertion: base64data,
-                              //   client_id: process.env.client_id,
-                              //   client_secret: process.env.client_secret,
-                              //   grant_type: 'urn:ietf:params:oauth:grant-type:saml2-bearer',
-                              //   scope: 'openid offline_access'
-                              // })
-                              // .then(function (response) {
-                              //   console.log(response);
-                              // })
-                              // .catch(function (error) {
-                              //   console.log(error);
-                              // });
-
-                              // axios({
-                              //   url: 'https://tomco.okta.com/oauth2/ausj09s9elt00otWB1t7/v1/token',
-                              //   method: 'post',
-                              //   headers: {'X-Requested-With': 'XMLHttpRequest'},
-
-                              //   params: {
-                              //     grant_type: 'urn:ietf:params:oauth:grant-type:saml2-bearer',
-                              //     scope: 'openid offline_access',
-                              //     assertion: response.toString('base64'),
-                              //     auth: {
-                              //       username: process.env.client_id,
-                              //       password: process.env.client_secret
-                              //     }
-                              //   }
-                              // })
-                              // .then(function (response) {
-                              //   console.log(response);
-                              // })
-                              // .catch(function (error) {
-                              //   console.log(error);
-                              // });
-
-                              // POST to webhook.site using url-encoding
-                              // Does not work; URL is too long!
-                              // axios({
-                              //   url: 'https://webhook.site/d4060c55-7e72-49e1-9f27-20934bd88d41',
-                              //   method: 'post',
-                              //   params: {
-                              //     grant_type: 'urn:ietf:params:oauth:grant-type:saml2-bearer',
-                              //     scope: 'openid offline_access',
-                              //     assertion: base64data,
-                              //     auth: {
-                              //       username: process.env.client_id,
-                              //       password: process.env.client_secret
-                              //     }
-                              //   }
-                              // })
-                              // .then(function (response) {
-                              //   console.log(response);
-                              // })
-                              // .catch(function (error) {
-                              //   console.log(error);
-                              // });
-
-                              var data = qs.stringify({
+                              const data = qs.stringify({
                                 'grant_type': 'urn:ietf:params:oauth:grant-type:saml2-bearer',
                                 'scope': 'openid offline_access',
                                 'assertion': base64data
                               });
 
-                              var config = {
+                              const authz_string = process.env.client_id + ":" + process.env.client_secret
+
+                              const config = {
                                 method: 'post',
-                                url: 'https://tomco.okta.com/oauth2/ausj09s9elt00otWB1t7/v1/token',
+                                url: process.env.issuer + '/v1/token',
                                 headers: { 
-                                  'Accept': 'application/json', 
-                                  'Authorization': 'Basic MG9hajA5dGwxMEpGVUlocHAxdDc6cjVWWGR2cHZRejcyVWxhZzdjVS03alVHYl9PeGFteDJEb1BSa1BqSw==', 
+                                  'Accept': 'application/json',
+                                  'Authorization': 'Basic ' + Buffer.from(authz_string).toString('base64'), 
+
+                                  // 'Authorization': 'Basic MG9hajA5dGwxMEpGVUlocHAxdDc6cjVWWGR2cHZRejcyVWxhZzdjVS03alVHYl9PeGFteDJEb1BSa1BqSw==', 
                                   'Content-Type': 'application/x-www-form-urlencoded', 
                                 },
                                 data: data
