@@ -3,16 +3,17 @@
  * Module dependencies.
  */
 
-
- const xml_parser = require('fast-xml-parser');
- const j2xParser = require("fast-xml-parser").j2xParser;
-
- const he = require('he');
+const ;
+const xml_parser = require('fast-xml-parser');
+const j2xParser = require("fast-xml-parser").j2xParser;
 
 const axios               = require('axios').default,
+      he                  = require('he'),
       qs                  = require('qs'),
       chalk               = require('chalk'),
       express             = require('express'),
+      xml_parser          = require('fast-xml-parser'),
+      j2xParser = require("fast-xml-parser").j2xParser;
       os                  = require('os'),
       fs                  = require('fs'),
       http                = require('http'),
@@ -480,20 +481,17 @@ function _runServer(argv) {
                                     {cyan ${opts.RelayState || UNDEFINED_VALUE}}
                                   {bold SAMLResponse} =>`
                               ));
-
-                              // const saml_response = prettyPrintXml(response.toString(), 4)
                               
                               const saml_response = response.toString()
 
+                              // extract the assertion from the SAML response
                               const a = saml_response.split('</samlp:Status>')
-
                               const b = a[1].split('</samlp:Response>')
-
                               const saml_assertion = b[0]
 
-                              // let data = 'stackabuse.com';
-                              
-                              const buff = new Buffer(saml_assertion);
+                              // const buff = new Buffer(saml_assertion);
+
+                              const buff = Buffer.from(saml_assertion, 'utf8');
 
                               const base64data = buff.toString('base64');
 
