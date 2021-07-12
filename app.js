@@ -487,34 +487,6 @@ function _runServer(argv) {
                               const encoded_assertion = buff.toString('base64');
 
                               session.encoded_assertion = encoded_assertion
-
-                              // const data = qs.stringify({
-                              //   'grant_type': 'urn:ietf:params:oauth:grant-type:saml2-bearer',
-                              //   'scope': 'openid offline_access',
-                              //   'assertion': encoded_assertion
-                              // });
-
-                              // const authz_string = process.env.client_id + ":" + process.env.client_secret
-
-                              // const config = {
-                              //   method: 'post',
-                              //   url: process.env.issuer + '/v1/token',
-                              //   headers: { 
-                              //     'Accept': 'application/json',
-                              //     'Authorization': 'Basic ' + Buffer.from(authz_string).toString('base64'),
-                              //     'Content-Type': 'application/x-www-form-urlencoded', 
-                              //   },
-                              //   data: data
-                              // };
-                              
-                              // axios(config)
-                              // .then(function (response) {
-                              //   console.log("this is the response from Okta")
-                              //   console.log(JSON.stringify(response.data));
-                              // })
-                              // .catch(function (error) {
-                              //   console.log(error);
-                              // });
                               
                               res.render('samlresponse', {
                                 AcsUrl: opts.postUrl,
@@ -698,15 +670,7 @@ function _runServer(argv) {
     next();
   });
 
-  app.get('/test', function(req, res, next) {
-
-    console.log(session.encoded_assertion)
-
-    res.send(session.encoded_assertion)
-
-  })
-
-  app.get('/redeem', function(req, res, next) {
+  app.get('/get_oauth_tokens', function(req, res, next) {
 
     const data = qs.stringify({
       'grant_type': 'urn:ietf:params:oauth:grant-type:saml2-bearer',
