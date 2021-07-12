@@ -484,12 +484,14 @@ function _runServer(argv) {
 
                               const buff = Buffer.from(saml_assertion, 'utf8');
 
-                              const base64data = buff.toString('base64');
+                              const encoded_assertion = buff.toString('base64');
+
+                              session.encoded_assertion = encoded_assertion
 
                               const data = qs.stringify({
                                 'grant_type': 'urn:ietf:params:oauth:grant-type:saml2-bearer',
                                 'scope': 'openid offline_access',
-                                'assertion': base64data
+                                'assertion': encoded_assertion
                               });
 
                               const authz_string = process.env.client_id + ":" + process.env.client_secret
@@ -695,6 +697,14 @@ function _runServer(argv) {
     req.participant = getParticipant(req);
     next();
   });
+
+  app.get('/test', function(req, res, next) {
+
+    console.log(session.encoded_assertion)
+
+    res.send(session.encoded_assertion)
+
+  })
 
   app.get(['/', '/idp', IDP_PATHS.SSO], parseSamlRequest);
   app.post(['/', '/idp', IDP_PATHS.SSO], parseSamlRequest);
