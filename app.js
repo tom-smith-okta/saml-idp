@@ -731,12 +731,13 @@ function _runServer(argv) {
     .then(function (response) {
       console.log("this is the response from Okta")
       console.log(JSON.stringify(response.data));
+      res.json(response.data)
+
     })
     .catch(function (error) {
       console.log(error);
     });
 
-    res.json(response.data)
     
     // res.render('samlresponse', {
     //   AcsUrl: opts.postUrl,
