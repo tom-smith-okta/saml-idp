@@ -4,22 +4,22 @@
 </head>
 <body>
 
-    <a href = "/get_oauth_tokens"><button>get OAuth tokens</button></a>
+    <p>
+        <a href = "/get_oauth_tokens"><button>get OAuth tokens</button></a>
+    </p>
 
     <form method="post" name="hiddenform" action="{{AcsUrl}}">
-        {{!-- <input type="hidden"
-               name="SAMLResponse"
-               value="{{SAMLResponse}}"> --}}
 
         <input type="submit" value="SSO to Okta dashboard">
 
         <input type="textarea"
                name="SAMLResponse"
                value="{{SAMLResponse}}"
-               rows=100
-               cols=50>
+               rows="100"
+               cols="50">
 
         <input type="hidden" name="RelayState" value="{{RelayState}}">
+
         <noscript>
             <p>JavaScript is disabled. Click Submit to continue.</p>
             <input type="submit" value="Submit">
