@@ -488,33 +488,33 @@ function _runServer(argv) {
 
                               session.encoded_assertion = encoded_assertion
 
-                              const data = qs.stringify({
-                                'grant_type': 'urn:ietf:params:oauth:grant-type:saml2-bearer',
-                                'scope': 'openid offline_access',
-                                'assertion': encoded_assertion
-                              });
+                              // const data = qs.stringify({
+                              //   'grant_type': 'urn:ietf:params:oauth:grant-type:saml2-bearer',
+                              //   'scope': 'openid offline_access',
+                              //   'assertion': encoded_assertion
+                              // });
 
-                              const authz_string = process.env.client_id + ":" + process.env.client_secret
+                              // const authz_string = process.env.client_id + ":" + process.env.client_secret
 
-                              const config = {
-                                method: 'post',
-                                url: process.env.issuer + '/v1/token',
-                                headers: { 
-                                  'Accept': 'application/json',
-                                  'Authorization': 'Basic ' + Buffer.from(authz_string).toString('base64'),
-                                  'Content-Type': 'application/x-www-form-urlencoded', 
-                                },
-                                data: data
-                              };
+                              // const config = {
+                              //   method: 'post',
+                              //   url: process.env.issuer + '/v1/token',
+                              //   headers: { 
+                              //     'Accept': 'application/json',
+                              //     'Authorization': 'Basic ' + Buffer.from(authz_string).toString('base64'),
+                              //     'Content-Type': 'application/x-www-form-urlencoded', 
+                              //   },
+                              //   data: data
+                              // };
                               
-                              axios(config)
-                              .then(function (response) {
-                                console.log("this is the response from Okta")
-                                console.log(JSON.stringify(response.data));
-                              })
-                              .catch(function (error) {
-                                console.log(error);
-                              });
+                              // axios(config)
+                              // .then(function (response) {
+                              //   console.log("this is the response from Okta")
+                              //   console.log(JSON.stringify(response.data));
+                              // })
+                              // .catch(function (error) {
+                              //   console.log(error);
+                              // });
                               
                               res.render('samlresponse', {
                                 AcsUrl: opts.postUrl,
@@ -703,6 +703,46 @@ function _runServer(argv) {
     console.log(session.encoded_assertion)
 
     res.send(session.encoded_assertion)
+
+  })
+
+  app.get('/redeem', function(req, res, next) {
+
+    const data = qs.stringify({
+      'grant_type': 'urn:ietf:params:oauth:grant-type:saml2-bearer',
+      'scope': 'openid offline_access',
+      'assertion': session.encoded_assertion
+    });
+
+    const authz_string = process.env.client_id + ":" + process.env.client_secret
+
+    const config = {
+      method: 'post',
+      url: process.env.issuer + '/v1/token',
+      headers: { 
+        'Accept': 'application/json',
+        'Authorization': 'Basic ' + Buffer.from(authz_string).toString('base64'),
+        'Content-Type': 'application/x-www-form-urlencoded', 
+      },
+      data: data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log("this is the response from Okta")
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+    res.json(response.data)
+    
+    // res.render('samlresponse', {
+    //   AcsUrl: opts.postUrl,
+    //   SAMLResponse: response.toString('base64'),
+    //   RelayState: opts.RelayState
+    // });
 
   })
 
