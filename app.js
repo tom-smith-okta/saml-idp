@@ -15,7 +15,6 @@ const axios               = require('axios').default,
       extend              = require('extend'),
       hbs                 = require('hbs'),
       logger              = require('morgan'),
-      bodyParser          = require('body-parser'),
       session             = require('express-session'),
       yargs               = require('yargs/yargs'),
       xmlFormat           = require('xml-formatter'),
@@ -478,6 +477,7 @@ function _runServer(argv) {
                               const saml_response = response.toString()
 
                               // extract the assertion from the SAML response
+                              // and store it in a session
                               const a = saml_response.split('</samlp:Status>')
                               const b = a[1].split('</samlp:Response>')
                               const saml_assertion = b[0]
@@ -553,7 +553,6 @@ function _runServer(argv) {
         return req.path.startsWith('/bower_components') || req.path.startsWith('/css')
       }
   }));
-  // app.use(bodyParser.urlencoded({extended: true}));
 
   app.use(express.json()); //Used to parse JSON bodies
 
@@ -704,13 +703,6 @@ function _runServer(argv) {
     .catch(function (error) {
       console.log(error);
     });
-
-    
-    // res.render('samlresponse', {
-    //   AcsUrl: opts.postUrl,
-    //   SAMLResponse: response.toString('base64'),
-    //   RelayState: opts.RelayState
-    // });
 
   })
 

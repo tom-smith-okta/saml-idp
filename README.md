@@ -1,5 +1,15 @@
 # Introduction
 
+This is a forked version of [Simple SAML Identity Provider (IdP) for Node](https://github.com/mcguinness/saml-idp).
+
+This fork is "optimized" in the following ways:
+
+* it is optimized for deployment on a remote server (e.g. heroku). I have not tried it with localhost, but it should work.
+* it uses .env for environment vars
+* it allows the "end user" to choose whether they want to SSO to the SP Okta tenant, or get OAuth tokens (via the SAML assertion bearer flow) from the SP Okta tenant
+
+The rest of this readme is from the original repo.
+
 This app provides a simple SAML Identity Provider (IdP) to test SAML 2.0 Service Providers (SPs) with the [SAML 2.0 Web Browser SSO Profile](http://en.wikipedia.org/wiki/SAML_2.0#Web_Browser_SSO_Profile) or the Single Logout Profile.
 
 > **This sample is not intended for use with production systems!**
